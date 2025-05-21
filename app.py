@@ -2,19 +2,14 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-@app.route('/preguntar', methods=['POST'])
+@app.route("/")
+def home():
+    return "API funcionando correctamente"
+
+@app.route("/respuesta", methods=["POST"])
 def responder():
     data = request.get_json()
-    pregunta = data.get('pregunta', '').lower()
-
-    if "correo" in pregunta:
-        respuesta = "Para abrir tu correo, ve a gmail.com y accede con tu cuenta."
-    elif "word" in pregunta:
-        respuesta = "Para abrir Word, haz clic en el botón de inicio y escribe Word."
-    else:
-        respuesta = "Lo siento, aún estoy aprendiendo sobre eso."
-
-    return jsonify({"respuesta": respuesta})
-
-if __name__ == '__main__':
-    app.run()
+    pregunta = data.get("pregunta", "")
+    
+    # Aquí puedes reemplazar esta respuesta por una lógica real
+    return jsonify({"respuesta": f"Tu pregunta fue: {pregunta}"})
